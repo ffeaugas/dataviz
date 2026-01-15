@@ -11,48 +11,49 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Theater {
-  id                      Int    @id @default(autoincrement())
-  autoNumber              Int    @unique @map("auto_number")
+  id                      Int     @id @default(autoincrement())
+  autoNumber              Int     @unique @map("auto_number")
   name                    String
-  regionCNC               Int    @map("region_cnc")
+  regionCNC               Int     @map("region_cnc")
   region                  String
   address                 String
-  INSEECode               String @map("insee_code")
+  INSEECode               Int     @map("insee_code")
   city                    String
   population              Int
-  DEP                     Int    @map("dep")
-  UU                      Int    @map("uu")
-  UUName                  String @map("uu_name")
-  UUPopulation            Int    @map("uu_population")
-  geographicSituation     String @map("geographic_situation")
+  DEP                     Int     @map("dep")
+  UU                      Int     @map("uu")
+  UUName                  String  @map("uu_name")
+  UUPopulation            Int     @map("uu_population")
+  geographicSituation     String  @map("geographic_situation")
   screens                 Int
   seats                   Int
-  weeksOfActivity         Int    @map("weeks_of_activity")
+  weeksOfActivity         Int     @map("weeks_of_activity")
   seances                 Int
-  entries2024             Int    @map("entries_2024")
-  entries2023             Int    @map("entries_2023")
-  entriesEvolution        Int    @map("entries_evolution")
-  entriesTranche          String @map("entries_tranche")
-  owner                   String @map("owner")
-  AE                      String @map("ae")
-  AECategory              String @map("ae_category")
-  AELabel                 String @map("ae_label")
+  entries2024             Int     @map("entries_2024")
+  entries2023             Int     @map("entries_2023")
+  entriesEvolution        Float   @map("entries_evolution")
+  entriesTranche          String  @map("entries_tranche")
+  owner                   String  @map("owner")
+  AE                      Boolean @map("ae")
+  AECategory              String  @map("ae_category")
+  AELabel                 String  @map("ae_label")
   gender                  String
-  multiplex               String
-  communityZone           String @map("community_zone")
-  numberOfFilmsProgrammed Int    @map("number_of_films_programmed")
-  numberOfNewFilms        Int    @map("number_of_new_films")
-  numberOfFilmsInWeek1    Int    @map("number_of_films_in_week1")
-  PdMEnEntriesFrenchFilms Int    @map("pd_m_en_entries_french_films")
-  PdMEntriesAmericanFilms Int    @map("pd_m_entries_american_films")
-  PdMEntriesEuropeanFilms Int    @map("pd_m_entries_european_films")
-  PdMEntriesOtherFilms    Int    @map("pd_m_entries_other_films")
-  AEFilms                 Int    @map("ae_films")
-  AEPartOfSeances         Int    @map("ae_part_of_seances")
-  AEPdMEntries            Int    @map("ae_pd_m_entries")
+  multiplex               Boolean @map("multiplex")
+  communityZone           String  @map("community_zone")
+  numberOfFilmsProgrammed Int     @map("number_of_films_programmed")
+  numberOfNewFilms        Int     @map("number_of_new_films")
+  numberOfFilmsInWeek1    Int     @map("number_of_films_in_week1")
+  PdMEnEntriesFrenchFilms Float   @map("pd_m_en_entries_french_films")
+  PdMEntriesAmericanFilms Float   @map("pd_m_entries_american_films")
+  PdMEntriesEuropeanFilms Float   @map("pd_m_entries_european_films")
+  PdMEntriesOtherFilms    Float   @map("pd_m_entries_other_films")
+  AEFilms                 Int     @map("ae_films")
+  AEPartOfSeances         Float   @map("ae_part_of_seances")
+  AEPdMEntries            Float   @map("ae_pd_m_entries")
   latitude                Float
   longitude               Float
 }

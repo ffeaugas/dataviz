@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VisualizationTheatersRouteImport } from './routes/visualization/theaters'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VisualizationTheatersRoute = VisualizationTheatersRouteImport.update({
+  id: '/visualization/theaters',
+  path: '/visualization/theaters',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/visualization/theaters': typeof VisualizationTheatersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/visualization/theaters': typeof VisualizationTheatersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/visualization/theaters': typeof VisualizationTheatersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/visualization/theaters'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/visualization/theaters'
+  id: '__root__' | '/' | '/visualization/theaters'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  VisualizationTheatersRoute: typeof VisualizationTheatersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/visualization/theaters': {
+      id: '/visualization/theaters'
+      path: '/visualization/theaters'
+      fullPath: '/visualization/theaters'
+      preLoaderRoute: typeof VisualizationTheatersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  VisualizationTheatersRoute: VisualizationTheatersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
